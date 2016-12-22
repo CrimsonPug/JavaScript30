@@ -104,6 +104,29 @@
   </div>
 
 <script>
+
+  const multipleCheck = document.querySelectorAll('.inbox input[type = "checkbox"]');
+
+  let lastChecked;
+
+  function handleCheck(e){
+    let inBetween = false;
+    if (e.shiftKey && this.checked){
+      multipleCheck.forEach(checkBox => {
+        // console.log(checkBox);
+        if (checkBox === this || checkBox === lastChecked){
+          inBetween = !inBetween;
+          // console.log('Finally checking it');
+        }
+        if (inBetween){
+          checkBox.checked = true;
+        }
+      })
+    }
+    lastChecked = this;
+  }
+  multipleCheck.forEach(checkBox => checkBox.addEventListener(`click`,handleCheck));
+
 </script>
 </body>
 </html>
